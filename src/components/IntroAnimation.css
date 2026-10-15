@@ -1,0 +1,125 @@
+
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(24px, 4vw, 55px);
+  background: #f8f7f5;
+  color: #161616;
+  overflow: hidden;
+  transition:
+    transform 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.intro-screen.intro-leaving {
+  transform: translateY(-100%);
+}
+
+.intro-top,
+.intro-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.intro-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.intro-name {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25em;
+  margin: 0;
+  font-size: clamp(42px, 7vw, 115px);
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.075em;
+  text-align: center;
+  animation: intro-name-appear 0.85s
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-name-last {
+  white-space: nowrap;
+}
+
+.intro-accent {
+  color: #fa7cbe;
+}
+
+.intro-progress {
+  width: min(140px, 25vw);
+  height: 2px;
+  background: #dedcda;
+  overflow: hidden;
+}
+
+.intro-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #161616;
+  transform-origin: left;
+  animation: intro-loading 2.7s ease-out both;
+}
+
+@keyframes intro-name-appear {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes intro-loading {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .intro-name {
+    font-size: clamp(38px, 10vw, 65px);
+    gap: 0.15em;
+  }
+
+  .intro-top,
+  .intro-bottom {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-screen {
+    transition: none;
+  }
+
+  .intro-name,
+  .intro-progress span {
+    animation: none;
+  }
+}

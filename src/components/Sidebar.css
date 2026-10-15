@@ -16,31 +16,10 @@
   padding: 28px 0;
 
   background: #0b0b0c;
-  border-right: 1px solid #252528;
 
   z-index: 100;
 }
 
-/* Sidebar brand */
-
-.sidebar-brand {
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: -0.06em;
-  color: #f0f0f0;
-}
-
-.sidebar-brand-dot {
-  display: block;
-
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-
-  background: #fa7cbe;
-
-  box-shadow: 0 0 14px rgba(250, 124, 190, 0.25);
-}
 
 /* Sidebar navigation */
 

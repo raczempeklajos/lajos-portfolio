@@ -84,12 +84,8 @@ function Sidebar() {
   };
 
   return (
-    <aside className="craft-sidebar">
-      <div className="sidebar-brand">
-        <span className="sidebar-brand-dot" />
-        </div>
-
-      <nav
+            <aside className="craft-sidebar">
+        <nav
         className="sidebar-navigation"
         aria-label="Section navigation"
       >
