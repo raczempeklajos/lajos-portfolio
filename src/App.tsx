@@ -1,8 +1,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { MouseEvent } from "react";
+import { Link } from "react-router";
+
 import ChessPreview from "./components/ChessPreview";
 import PetMedicalPreview from "./components/PetMedicalPreview";
+import Reveal from "./components/Reveal";
+
 import "./App.css";
 
 type ProjectPreview = "chess" | "pet" | null;
@@ -13,8 +17,10 @@ function App() {
     useState<ProjectPreview>(null);
 
   const previewRef = useRef<HTMLDivElement>(null);
+
   const targetPosition = useRef({ x: 0, y: 0 });
   const currentPosition = useRef({ x: 0, y: 0 });
+
   const animationFrame = useRef<number | null>(null);
   const positionInitialized = useRef(false);
 
@@ -107,6 +113,7 @@ function App() {
 
   return (
     <div className="portfolio">
+
       {/* Shared floating project preview */}
       <div
         ref={previewRef}
@@ -153,16 +160,20 @@ function App() {
             About
           </a>
 
-          <a href="mailto:hello@example.com">
-            Contact ↗
+          <a
+            href="#contact"
+            onClick={() => setMenuOpen(false)}
+          >
+            Contact
           </a>
         </nav>
       </header>
 
       <main>
+
         {/* Hero section */}
         <section className="hero" id="home">
-          <div className="hero-content">
+          <div className="hero-content hero-enter">
             <div className="eyebrow">
               <span className="status-dot"></span>
               SOFTWARE DEVELOPER
@@ -190,33 +201,39 @@ function App() {
 
         {/* Selected projects */}
         <section className="work-section" id="work">
-          <div className="section-heading">
-            <span>01 / SELECTED WORK</span>
-            <span>2026</span>
-          </div>
+
+          <Reveal>
+            <div className="section-heading">
+              <span>01 / SELECTED WORK</span>
+              <span>2026</span>
+            </div>
+          </Reveal>
 
           {/* ChessGame project */}
-          <a
-            className="project chess-project"
-            href="https://github.com/raczempeklajos/ChessGame"
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseMove={(event) =>
-              handlePreviewMove(event, "chess")
-            }
-            onMouseLeave={handlePreviewLeave}
-          >
-            <div>
-              <h2>ChessGame</h2>
-              <p>Full-stack chess application</p>
-            </div>
+          <Reveal delay={80}>
+            <Link
+              className="project chess-project"
+              to="/projects/chessgame"
+              onMouseMove={(event) =>
+                handlePreviewMove(event, "chess")
+              }
+              onMouseLeave={handlePreviewLeave}
+            >
+              <div>
+                <h2>ChessGame</h2>
+                <p>Full-stack chess application</p>
+              </div>
 
-            <span className="project-arrow">↗</span>
-          </a>
+              <span className="project-arrow">↗</span>
+            </Link>
+          </Reveal>
 
-          {/* Pet Medical System project */}
-          <div
+          
+        {/* Pet Medical System project */}
+        <Reveal delay={160}>
+          <Link
             className="project pet-project"
+            to="/projects/pet-medical-system"
             onMouseMove={(event) =>
               handlePreviewMove(event, "pet")
             }
@@ -228,11 +245,16 @@ function App() {
             </div>
 
             <span className="project-arrow">↗</span>
-          </div>
+          </Link>
+        </Reveal>
+
+
         </section>
 
-        {/* About section */}
-        <section className="about-section" id="about">
+        
+      {/* About section */}
+      <section className="about-section" id="about">
+        <Reveal>
           <span className="section-label">02 / ABOUT</span>
 
           <h2>
@@ -241,11 +263,73 @@ function App() {
             Developer by choice.
           </h2>
 
-          <p>
-            I enjoy building useful software, solving problems
-            and continuously learning new technologies.
-          </p>
-        </section>
+          <div className="about-content">
+            <p>
+              I'm a software developer with a background in
+              customer support and a passion for building
+              practical digital experiences.
+            </p>
+
+            <p>
+              After completing my software development training,
+              I've been expanding my skills through hands-on
+              projects using React, TypeScript, Python, C#
+              and modern web technologies.
+            </p>
+
+            <p>
+              I enjoy problem-solving, continuous learning
+              and turning ideas into functional applications.
+            </p>
+          </div>
+
+          <div className="about-skills">
+            <span>React</span>
+            <span>TypeScript</span>
+            <span>JavaScript</span>
+            <span>Python</span>
+            <span>C# / .NET</span>
+            <span>Django</span>
+            <span>SQL</span>
+            <span>Git</span>
+          </div>
+        </Reveal>
+      </section>
+
+      
+    {/* Contact section */}
+    <section className="contact-section" id="contact">
+      <Reveal>
+        <span className="section-label">03 / CONTACT</span>
+
+        <h2>
+          Have something
+          <br />
+          in mind<span>?</span>
+        </h2>
+
+        <p>
+          I'm open to new opportunities, collaborations
+          and interesting projects.
+        </p>
+
+        <div className="contact-links">
+          <a href="mailto:lajos.viktor.raczempek@gmail.com">
+            Get in touch ↗
+          </a>
+
+          <a
+            href="https://github.com/raczempeklajos"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub ↗
+          </a>
+        </div>
+      </Reveal>
+    </section>
+
+
       </main>
 
       {/* Footer */}
@@ -253,6 +337,7 @@ function App() {
         <span>© 2026 lajos.</span>
         <span>Designed & built with care.</span>
       </footer>
+
     </div>
   );
 }
