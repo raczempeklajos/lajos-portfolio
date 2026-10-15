@@ -18,8 +18,61 @@ import {
 import { FaDatabase } from "react-icons/fa";
 
 import "./App.css";
+import { useLanguage } from "./LanguageContext";
+
+const translations = {
+  en: {
+    menu: "Menu", close: "Close", work: "Work", about: "About", contact: "Contact",
+    role: "SOFTWARE DEVELOPER", hero1: "Turning ideas", hero2: "real stuff.",
+    heroDescription: "I'm Ráczempek Lajos, a software developer passionate about building thoughtful digital experiences and turning creative ideas into working solutions.",
+    explore: "Explore my work", photo: "BEHIND THE CODE / 2026", motto: "CREATIVE THINKING. PRACTICAL BUILDING.",
+    selectedWork: "02 / SELECTED WORK", projectsCount: "02 PROJECTS", projects: "Projects",
+    projectsDescription: "A collection of selected work, experiments and applications.", viewProjects: "View projects",
+    aboutLabel: "03 / ABOUT", about1: "Curious by nature.", about2: "Developer by choice.",
+    aboutDescription1: "I'm a software developer with a background in customer support and a passion for building practical digital experiences.",
+    aboutDescription2: "After completing my software development training, I've been expanding my skills through hands-on projects using modern web technologies.",
+    readMore: "Read more +", showLess: "Show less −", backgroundLabel: "01 / BACKGROUND",
+    backgroundTitle: "People and technology.",
+    backgroundText: "My experience in customer support has helped me develop communication, problem-solving and analytical skills. Working with different people and challenges has shaped how I approach technical problems.",
+    developmentLabel: "02 / DEVELOPMENT", developmentTitle: "Learning through building.",
+    developmentText: "I enjoy understanding how applications work, from frontend interfaces to backend logic. My projects give me the opportunity to explore different technologies and turn ideas into functional solutions.",
+    beyondLabel: "03 / BEYOND CODE", beyondTitle: "More than development.",
+    beyondText: "Outside programming, I'm interested in sports, photography, music and reading. Playing music and working on creative projects are important parts of my life.",
+    contactLabel: "04 / CONTACT", contact1: "Have something", contact2: "in mind",
+    contactDescription: "I'm always interested in new challenges, meaningful projects, and opportunities to grow as a developer. Have something in mind? Let's connect.",
+    getInTouch: "Get in Touch", footer: "Designed & built with care.",
+    connectLabel: "LET'S CONNECT", modalTitle: "Get in touch", modalDescription: "Interested in working together or have a question? Feel free to reach out.",
+    closeContact: "Close contact window", openProjects: "Open projects: ChessGame and Pet Medical System",
+  },
+  hu: {
+    menu: "Menü", close: "Bezárás", work: "Projektek", about: "Rólam", contact: "Kapcsolat",
+    role: "SZOFTVERFEJLESZTŐ", hero1: "Ötletekből", hero2: "működő megoldások.",
+    heroDescription: "Ráczempek Lajos vagyok, szoftverfejlesztő. Szeretek átgondolt digitális megoldásokat készíteni, és a kreatív ötleteket működő alkalmazásokká alakítani.",
+    explore: "Projektjeim megtekintése", photo: "A KÓD MÖGÖTT / 2026", motto: "KREATÍV GONDOLKODÁS. GYAKORLATI MEGVALÓSÍTÁS.",
+    selectedWork: "02 / KIEMELT MUNKÁK", projectsCount: "02 PROJEKT", projects: "Projektek",
+    projectsDescription: "Válogatás a projektjeimből, amelyek során új ötleteket próbáltam ki, és gyakorlati tapasztalatot szereztem.", viewProjects: "Projektek megtekintése",
+    aboutLabel: "03 / RÓLAM", about1: "A kíváncsiság hajt.", about2: "A fejlesztést én választottam.",
+    aboutDescription1: "Szoftverfejlesztőként olyan alkalmazásokat szeretek készíteni, amelyek valódi problémákra adnak választ. Korábban ügyfélszolgálaton dolgoztam, ahol sokat tanultam a kommunikációról és a problémamegoldásról.",
+    aboutDescription2: "A szoftverfejlesztő képzés elvégzése után saját projekteken dolgozom, és folyamatosan bővítem a webfejlesztési ismereteimet.",
+    readMore: "Bővebben +", showLess: "Kevesebb −", backgroundLabel: "01 / HÁTTÉR",
+    backgroundTitle: "Emberek és technológia.",
+    backgroundText: "Az ügyfélszolgálati munkám során megtanultam figyelmesen kérdezni, átlátni az összetett helyzeteket és érthetően kommunikálni. Ezekre a készségekre a fejlesztés során is támaszkodom.",
+    developmentLabel: "02 / FEJLESZTÉS", developmentTitle: "Fejlődés gyakorlati projekteken keresztül.",
+    developmentText: "Érdekel, hogyan épül fel egy alkalmazás a felhasználói felülettől a háttérrendszerig. A saját projektjeimben új technológiákat próbálhatok ki, és az ötleteimet működő alkalmazásokká alakíthatom.",
+    beyondLabel: "03 / A KÓDON TÚL", beyondTitle: "Több mint fejlesztés.",
+    beyondText: "Szabadidőmben sportolok, fotózom, olvasok és zenélek. A kreatív tevékenységek a programozáson kívül is fontos szerepet játszanak az életemben.",
+    contactLabel: "04 / KAPCSOLAT", contact1: "Van egy ötleted", contact2: "vagy kérdésed",
+    contactDescription: "Mindig érdekelnek az új kihívások, az értékes projektek és a fejlődési lehetőségek. Ha van egy ötleted vagy kérdésed, keress bátran!",
+    getInTouch: "Kapcsolatfelvétel", footer: "Tervezte és készítette: Ráczempek Lajos.",
+    connectLabel: "LÉPJÜNK KAPCSOLATBA", modalTitle: "Írj nekem", modalDescription: "Szívesen dolgoznál velem, vagy kérdésed van? Keress bátran az alábbi elérhetőségeken.",
+    closeContact: "Kapcsolati ablak bezárása", openProjects: "Projektek megnyitása: ChessGame és Pet Medical System",
+  },
+} as const;
 
 function App() {
+  const { language, setLanguage } = useLanguage();
+  const t = translations[language];
+
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
@@ -114,10 +167,10 @@ function App() {
             className="menu-toggle"
             type="button"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle navigation"
+            aria-label={language === "hu" ? "Navigáció megnyitása" : "Toggle navigation"}
             aria-expanded={menuOpen}
           >
-            {menuOpen ? "Close" : "Menu"}
+            {menuOpen ? t.close : t.menu}
           </button>
 
           <nav
@@ -129,22 +182,32 @@ function App() {
               href="#work"
               onClick={() => setMenuOpen(false)}
             >
-              Work
+              {t.work}
             </a>
 
             <a
               href="#about"
               onClick={() => setMenuOpen(false)}
             >
-              About
+              {t.about}
             </a>
 
             <a
               href="#contact"
               onClick={() => setMenuOpen(false)}
             >
-              Contact
+              {t.contact}
             </a>
+            <button
+              type="button"
+              className="language-switch"
+              onClick={() => setLanguage(language === "en" ? "hu" : "en")}
+              aria-label={language === "en" ? "Switch to Hungarian" : "Váltás angol nyelvre"}
+              title={language === "en" ? "Magyar" : "English"}
+            >
+              <span aria-hidden="true">{language === "en" ? "🇭🇺" : "🇬🇧"}</span>
+              <span>{language === "en" ? "HU" : "EN"}</span>
+            </button>
           </nav>
         </header>
 
@@ -156,24 +219,21 @@ function App() {
     <div className="hero-copy">
       <div className="eyebrow">
         <span className="status-dot" />
-        SOFTWARE DEVELOPER
+        {t.role}
       </div>
 
       <h1>
-        Turning ideas
+        {t.hero1}
         <br />
-        into <span>real stuff.</span>
+        <span>{t.hero2}</span>
       </h1>
 
       <p>
-        I'm Ráczempek Lajos, a software developer
-        passionate about building thoughtful digital
-        experiences and turning creative ideas into
-        working solutions.
+        {t.heroDescription}
       </p>
 
       <a href="#work" className="hero-work-link">
-      Explore my work
+      {t.explore}
       <span aria-hidden="true">↓</span>
     </a>
     </div>
@@ -184,14 +244,12 @@ function App() {
       <div className="hero-photo-frame">
         <img
           src="/hero-portrait.png"
-          alt="Portrait of Ráczempek Lajos"
+          alt={language === "hu" ? "Ráczempek Lajos portréja" : "Portrait of Ráczempek Lajos"}
           className="hero-portrait"
         />
       </div>
 
-      <span className="hero-photo-label">
-        BEHIND THE CODE / 2026
-      </span>
+      
 
       <span className="hero-photo-cross" aria-hidden="true">
         +
@@ -200,7 +258,7 @@ function App() {
   </div>
 
   <div className="hero-bottom">
-    <span>CREATIVE THINKING. PRACTICAL BUILDING.</span>
+    <span>{t.motto}</span>
     <span>01 / 04</span>
   </div>
 </section>
@@ -209,7 +267,7 @@ function App() {
           <section className="work-section" id="work">
             <Reveal>
               <div className="section-heading">
-                <span>02 / SELECTED WORK</span>
+                <span>{t.selectedWork}</span>
                 <span>2026</span>
               </div>
             </Reveal>
@@ -220,21 +278,20 @@ function App() {
                 className="projects-launcher"
                 onClick={openProjects}
                 aria-haspopup="dialog"
-                aria-label="Open projects: ChessGame and Pet Medical System"
+                aria-label={t.openProjects}
               >
                 <span className="projects-launcher-left">
                   <span className="projects-launcher-label">
-                    02 PROJECTS
+                    {t.projectsCount}
                   </span>
                   <span className="projects-launcher-text">
-                    <h2>Projects</h2>
+                    <h2>{t.projects}</h2>
                     <p>
-                      A collection of selected work, experiments
-                      and applications.
+                      {t.projectsDescription}
                     </p>
                   </span>
                   <span className="projects-launcher-cta">
-                  View projects
+                  {t.viewProjects}
                 </span>
                 </span>
                 <span className="projects-launcher-right" aria-hidden="true">
@@ -263,26 +320,22 @@ function App() {
         <section className="about-section" id="about">
           <Reveal>
             <span className="section-label">
-              03 / ABOUT
+              {t.aboutLabel}
             </span>
 
             <h2>
-              Curious by nature.
+              {t.about1}
               <br />
-              Developer by choice.
+              {t.about2}
             </h2>
 
             <div className="about-content">
               <p>
-                I'm a software developer with a background in
-                customer support and a passion for building
-                practical digital experiences.
+                {t.aboutDescription1}
               </p>
 
               <p>
-                After completing my software development training,
-                I've been expanding my skills through hands-on
-                projects using modern web technologies.
+                {t.aboutDescription2}
               </p>
 
               <button
@@ -292,7 +345,7 @@ function App() {
                 aria-expanded={aboutExpanded}
                 aria-controls="about-extra"
               >
-                {aboutExpanded ? "Show less −" : "Read more +"}
+                {aboutExpanded ? t.showLess : t.readMore}
               </button>
 
               {aboutExpanded && (
@@ -301,37 +354,26 @@ function App() {
                   className="about-expanded"
                 >
                   <div className="about-extra-item">
-                    <span>01 / BACKGROUND</span>
-                    <h3>People and technology.</h3>
+                    <span>{t.backgroundLabel}</span>
+                    <h3>{t.backgroundTitle}</h3>
                     <p>
-                      My experience in customer support has helped
-                      me develop communication, problem-solving
-                      and analytical skills. Working with different
-                      people and challenges has shaped how I
-                      approach technical problems.
+                      {t.backgroundText}
                     </p>
                   </div>
 
                   <div className="about-extra-item">
-                    <span>02 / DEVELOPMENT</span>
-                    <h3>Learning through building.</h3>
+                    <span>{t.developmentLabel}</span>
+                    <h3>{t.developmentTitle}</h3>
                     <p>
-                      I enjoy understanding how applications work,
-                      from frontend interfaces to backend logic.
-                      My projects give me the opportunity to
-                      explore different technologies and turn
-                      ideas into functional solutions.
+                      {t.developmentText}
                     </p>
                   </div>
 
                   <div className="about-extra-item">
-                    <span>03 / BEYOND CODE</span>
-                    <h3>More than development.</h3>
+                    <span>{t.beyondLabel}</span>
+                    <h3>{t.beyondTitle}</h3>
                     <p>
-                      Outside programming, I'm interested in
-                      sports, photography, music and reading.
-                      Playing music and working on creative
-                      projects are important parts of my life.
+                      {t.beyondText}
                     </p>
                   </div>
                 </div>
@@ -359,19 +401,16 @@ function App() {
           >
             <Reveal>
               <span className="section-label">
-                04 / CONTACT
+                {t.contactLabel}
               </span>
 
               <h2>
-                Have something
+                {t.contact1}
                 <br />
-                in mind<span>?</span>
+                {t.contact2}<span>?</span>
               </h2>
 
-              <p>
-                I'm open to new opportunities,
-                collaborations and interesting projects.
-              </p>
+              <p>{t.contactDescription}</p>
 
               <div className="contact-links">
                 <button
@@ -380,7 +419,7 @@ function App() {
                   className="contact-button"
                   onClick={() => setContactOpen(true)}
                 >
-                  Get in Touch
+                  {t.getInTouch}
                 </button>
 
                 <a
@@ -399,7 +438,7 @@ function App() {
         {/* Footer */}
         <footer className="footer">
           <span>© 2026 Ráczempek Lajos</span>
-          <span>Designed &amp; built with care.</span>
+          <span>{t.footer}</span>
         </footer>
       </div>
 
@@ -424,27 +463,40 @@ function App() {
               type="button"
               className="contact-modal-close"
               onClick={() => setContactOpen(false)}
-              aria-label="Close contact window"
+              aria-label={t.closeContact}
             >
               ×
             </button>
 
             <span className="section-label">
-              LET'S CONNECT
+              {t.connectLabel}
             </span>
 
             <h2 id="contact-modal-title">
-              Get in touch<span>.</span>
+              {t.modalTitle}<span>.</span>
             </h2>
 
             <p>
-              Interested in working together or have a
-              question? Feel free to reach out.
+              {t.modalDescription}
             </p>
 
-            <div className="contact-modal-links">
+            <div className="contact-modal-links" style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
               <a href="mailto:lajos.viktor.raczempek@gmail.com">
-                Send an email
+                Email — lajos.viktor.raczempek@gmail.com
+              </a>
+              <a
+                href="https://github.com/raczempeklajos"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub — raczempeklajos
+              </a>
+              <a
+                href="https://www.linkedin.com/in/lajos-r%C3%A1czempek-054329397"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn — Lajos Ráczempek
               </a>
             </div>
           </div>
@@ -455,3 +507,4 @@ function App() {
 }
 
 export default App;
+

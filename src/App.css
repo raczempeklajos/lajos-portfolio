@@ -59,9 +59,6 @@
   justify-content: center;
 }
 
-.hero-content {
-  margin-top: -50px;
-}
 
 .eyebrow,
 .section-label {
@@ -99,42 +96,6 @@
   line-height: 1.9;
 }
 
-.explore {
-  position: absolute;
-  left: 7%;
-  bottom: 70px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  color: #aaa;
-  text-decoration: none;
-  font-size: 11px;
-}
-
-.explore-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 37px;
-  height: 37px;
-  border: 1px solid #3a3a3a;
-  border-radius: 50%;
-  font-size: 17px;
-  transition: transform 0.3s ease;
-}
-
-.explore:hover .explore-icon {
-  transform: translateY(5px);
-}
-
-.hero-index {
-  position: absolute;
-  right: 7%;
-  bottom: 80px;
-  color: #555;
-  font-size: 10px;
-  letter-spacing: 2px;
-}
 
 .work-section,
 .about-section {
@@ -152,42 +113,6 @@
   letter-spacing: 1.5px;
 }
 
-.project {
-  padding: 36px 0;
-  border-top: 1px solid #282828;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  color: inherit;
-  text-decoration: none;
-  transition: padding 0.3s ease;
-}
-
-.project:last-child {
-  border-bottom: 1px solid #282828;
-}
-
-a.project:hover {
-  padding-left: 15px;
-}
-
-.project h2 {
-  margin: 0 0 10px;
-  font-size: clamp(22px, 3vw, 36px);
-  font-weight: 400;
-  letter-spacing: -1.5px;
-}
-
-.project p {
-  margin: 0;
-  color: #777;
-  font-size: 12px;
-}
-
-.project-arrow {
-  color: #888;
-  font-size: 23px;
-}
 
 .about-section {
   padding-top: 130px;
@@ -258,9 +183,7 @@ a.project:hover {
     min-height: calc(100svh - 80px);
   }
 
-  .hero-content {
-    margin-top: -30px;
-  }
+  
 
   .hero h1 {
     font-size: clamp(42px, 9vw, 64px);
@@ -503,12 +426,6 @@ a.project:hover {
 .pet-preview-appointment small {
   font-size: 8px;
   color: #8d968f;
-}
-
-@media (hover: none), (max-width: 768px) {
-  .floating-preview {
-    display: none;
-  }
 }
 
 
@@ -799,7 +716,6 @@ a.project:hover {
 }
 
 
-
 /* Homepage entrance animation */
 
 .hero-enter {
@@ -830,9 +746,6 @@ a.project:hover {
 
 /* Page transition */
 
-
-/* Page transition */
-
 .page-transition {
   opacity: 0;
 
@@ -850,8 +763,6 @@ a.project:hover {
     transition: none;
   }
 }
-
-
 
 
 /* Long project titles */
@@ -963,19 +874,13 @@ a.project:hover {
 
 
 @media (max-width: 600px) {
-  .hero-content p {
-    font-size: 14px;
-    line-height: 1.85;
-    max-width: 320px;
-  }
+  
 
   .hero h1 {
     line-height: 1.12;
   }
 
-  .explore {
-    font-size: 11px;
-  }
+  
 }
 
 
@@ -1002,19 +907,6 @@ a.project:hover {
 
   .contact-links a {
     font-size: 12px;
-  }
-}
-
-
-@media (max-width: 600px) {
-  .project p {
-    font-size: 12px;
-    line-height: 1.7;
-  }
-
-  .project h2 {
-    font-size: 20px;
-    line-height: 1.3;
   }
 }
 
@@ -1050,141 +942,11 @@ a.project:hover {
 
 /* Modern interactive project cards */
 
-.project-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.project-grid > .reveal {
-  height: 100%;
-}
-
-.project-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 70px;
-
-  height: 100%;
-  min-height: 340px;
-  padding: 32px;
-
-  background: #141416;
-  border: 1px solid #2e2e32;
-  border-radius: 12px;
-
-  color: #ededed;
-  text-decoration: none;
-  overflow: hidden;
-
-  transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
-}
-
-.project-card:hover {
-  background: #19191c;
-  border-color: #57575e;
-  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.22);
-}
-
-.project-card:focus-visible {
-  outline: 2px solid #d97551;
-  outline-offset: 4px;
-}
-
-.project-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.project-card-top > span:first-child {
-  font-size: 10px;
-  letter-spacing: 1.4px;
-  color: #d97551;
-}
-
-
-
-.project-card-content {
-  margin-top: auto;
-}
-
-.project-card-content h2 {
-  margin: 0 0 15px;
-  font-size: clamp(27px, 3vw, 40px);
-  font-weight: 400;
-  letter-spacing: -0.055em;
-  line-height: 1.15;
-}
-
-.project-card-content p {
-  max-width: 330px;
-  margin: 0;
-  color: #99999f;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.project-card-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.project-card-stack span {
-  padding: 7px 10px;
-  border: 1px solid #36363b;
-  border-radius: 20px;
-
-  color: #a9a9af;
-  font-size: 10px;
-  line-height: 1;
-  white-space: nowrap;
-}
 
 /* Responsive project cards */
 
-@media (max-width: 1000px) {
-  .project-grid {
-    grid-template-columns: 1fr;
-  }
 
-  .project-card {
-    min-height: 300px;
-    gap: 45px;
-  }
-}
-
-@media (max-width: 600px) {
-  .project-grid {
-    gap: 14px;
-  }
-
-  .project-card {
-    min-height: 280px;
-    padding: 24px;
-    gap: 38px;
-  }
-
-  .project-card-content h2 {
-    font-size: 29px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .project-card,
-  .project-card-arrow {
-    transition: none;
-  }
-}
-
-
-/* Projects launcher â€” monochrome panels with pink accents */
+/* Projects launcher Ã¢â‚¬â€ monochrome panels with pink accents */
 
 .work-section .projects-launcher {
   box-sizing: border-box;
@@ -1877,15 +1639,6 @@ a.project:hover {
   transform: scale(1.035);
 }
 
-.hero-photo-label {
-  position: absolute;
-  bottom: -35px;
-  left: 0;
-  color: #929094;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-}
 
 .hero-photo-cross {
   position: absolute;
@@ -1985,9 +1738,7 @@ a.project:hover {
     width: 80%;
   }
 
-  .hero-photo-label {
-    font-size: 8px;
-  }
+  
 
   .hero-photo-cross {
     right: -10px;
@@ -2021,3 +1772,26 @@ a.project:hover {
   cursor: pointer;
   font-family: inherit;
 }
+
+.navigation .language-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px 10px;
+  border: 1px solid rgba(250, 124, 190, 0.42);
+  border-radius: 999px;
+  background: rgba(250, 124, 190, 0.08);
+  color: #f7f2f5;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+.navigation .language-switch:hover,
+.navigation .language-switch:focus-visible {
+  background: rgba(250, 124, 190, 0.19);
+  border-color: #fa7cbe;
+}
+.navigation .language-switch span:first-child { font-size: 17px; line-height: 1; }
