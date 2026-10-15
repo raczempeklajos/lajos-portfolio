@@ -1,0 +1,177 @@
+
+/* Fixed sidebar */
+
+.craft-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 76px;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 28px 0;
+
+  background: #0b0b0c;
+  border-right: 1px solid #252528;
+
+  z-index: 100;
+}
+
+/* Sidebar brand */
+
+.sidebar-brand {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.06em;
+  color: #f0f0f0;
+}
+
+.sidebar-brand-dot {
+  display: block;
+
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  background: #fa7cbe;
+
+  box-shadow: 0 0 14px rgba(250, 124, 190, 0.25);
+}
+
+/* Sidebar navigation */
+
+.sidebar-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.sidebar-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 54px;
+  height: 24px;
+
+  padding: 0;
+  border: none;
+  background: transparent;
+
+  cursor: pointer;
+}
+
+/* Navigation lines */
+
+.sidebar-line {
+  display: block;
+
+  width: 20px;
+  height: 1px;
+
+  background: #55555a;
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+.sidebar-item:hover .sidebar-line {
+  width: 32px;
+  background: #d5d5d8;
+}
+
+.sidebar-item.active .sidebar-line {
+  width: 36px;
+  height: 2px;
+  background: #fa7cbe;
+}
+
+/* Sidebar tooltips */
+
+.sidebar-tooltip {
+  position: absolute;
+  left: 62px;
+
+  padding: 7px 11px;
+
+  background: #19191c;
+  border: 1px solid #303034;
+  border-radius: 6px;
+
+  font-size: 11px;
+  color: #e9e9eb;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-5px);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.sidebar-item:hover .sidebar-tooltip,
+.sidebar-item:focus-visible .sidebar-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* Navigation numbers */
+
+.sidebar-number {
+  position: absolute;
+  right: 0;
+
+  font-size: 8px;
+  color: #55555a;
+}
+
+.sidebar-item.active .sidebar-number {
+  color: #fa7cbe;
+}
+
+.sidebar-item:focus-visible {
+  outline: 2px solid #fa7cbe;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Sidebar bottom */
+
+.sidebar-bottom {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: #55555a;
+}
+
+/* Hide sidebar on smaller screens */
+
+@media (max-width: 900px) {
+  .craft-sidebar {
+    display: none;
+  }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-line,
+  .sidebar-tooltip {
+    transition: none;
+  }
+}

@@ -1,4 +1,4 @@
-
+import ChessPreview from "../components/ChessPreview";
 import { Link } from "react-router";
 import Reveal from "../components/Reveal";
 
@@ -41,15 +41,88 @@ function ChessGamePage() {
             </p>
 
             <div className="project-page-links">
-              <a
+            <a
+                href="https://chess-game-indol.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Play Chess ↗
+            </a>
+
+            <a
                 href="https://github.com/raczempeklajos/ChessGame"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
+            >
                 GitHub ↗
-              </a>
+            </a>
             </div>
           </section>
+        </Reveal>
+
+        {/* Project visual preview */}
+        <Reveal delay={150}>
+        <section className="project-showcase">
+            <div className="project-showcase-top">
+            <span className="section-label">
+                INTERACTIVE PROJECT / 2026
+            </span>
+
+            <span className="project-showcase-index">
+                01 — 02
+            </span>
+            </div>
+
+            <div className="project-showcase-content">
+            <div className="project-showcase-preview">
+                <ChessPreview />
+            </div>
+
+            <div className="project-showcase-info">
+                <span className="project-showcase-eyebrow">
+                THE PROJECT
+                </span>
+
+                <h2>
+                Every move
+                <br />
+                matters<span>.</span>
+                </h2>
+
+                <p>
+                A chess application combining traditional
+                game logic with modern web technologies.
+                Built with React, TypeScript and .NET.
+                </p>
+
+                <div className="project-showcase-tags">
+                <span>React</span>
+                <span>TypeScript</span>
+                <span>ASP.NET Core</span>
+                </div>
+
+                <div className="project-showcase-actions">
+                <a
+                    href="https://chess-game-indol.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-showcase-link"
+                >
+                    Play Chess ↗
+                </a>
+
+                <a
+                    href="https://github.com/raczempeklajos/ChessGame"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-showcase-link"
+                >
+                    Explore source code ↗
+                </a>
+                </div>
+            </div>
+            </div>
+        </section>
         </Reveal>
 
         {/* Project metadata */}
