@@ -20,6 +20,8 @@ import { FaDatabase } from "react-icons/fa";
 import "./App.css";
 import { useLanguage } from "./LanguageContext";
 
+// Centralized UI copy for the English and Hungarian versions of the portfolio.
+// The active language determines which set of labels and descriptions is displayed.
 const translations = {
   en: {
     menu: "Menu", close: "Close", work: "Work", about: "About", contact: "Contact",
@@ -67,18 +69,23 @@ const translations = {
     connectLabel: "LÉPJÜNK KAPCSOLATBA", modalTitle: "Írj nekem", modalDescription: "Szívesen dolgoznál velem, vagy kérdésed van? Keress bátran az alábbi elérhetőségeken.",
     closeContact: "Kapcsolati ablak bezárása", openProjects: "Projektek megnyitása: ChessGame és Pet Medical System",
   },
-} as const;
+} as const; // Preserve literal types for translation keys and values.
 
 function App() {
+  // Access the shared language preference provided by LanguageContext.
   const { language, setLanguage } = useLanguage();
+  // Resolve all visible page text from the currently selected language.
   const t = translations[language];
 
+  // Local UI state for expandable content, mobile navigation, and dialogs.
   const [aboutExpanded, setAboutExpanded] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  // Element references help manage keyboard focus when the contact dialog opens or closes.
   const contactCloseRef = useRef<HTMLButtonElement>(null);
   const contactTriggerRef = useRef<HTMLButtonElement>(null);
+  // Open the project picker and close mobile navigation to avoid overlapping menus.
   const openProjects = () => {
     setProjectsOpen(true);
     setMenuOpen(false);
@@ -88,13 +95,16 @@ function App() {
     setProjectsOpen(false);
   };
 
+  // Apply dialog accessibility behavior only while the contact modal is open.
   useEffect(() => {
     if (!contactOpen) return;
 
+    // Prevent the page behind the modal from scrolling, then focus the close button.
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     contactCloseRef.current?.focus();
 
+    // Support Escape to close and Tab/Shift+Tab to keep keyboard focus inside the dialog.
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setContactOpen(false);
@@ -107,6 +117,7 @@ function App() {
 
         if (!modal) return;
 
+        // Collect focusable controls in DOM order for a simple focus trap.
         const elements = Array.from(
           modal.querySelectorAll<HTMLElement>(
             'button:not([disabled]), a[href]'
@@ -133,6 +144,7 @@ function App() {
 
     document.addEventListener("keydown", handleKeyDown);
 
+    // Restore the previous page state and return focus to the trigger on close.
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener("keydown", handleKeyDown);
@@ -144,13 +156,13 @@ function App() {
     <>
       <IntroAnimation />
 
-      {/* Fixed sidebar navigation */}
+      {/* Persistent sidebar navigation shared across the portfolio. */}
       <Sidebar />
 
-      {/* Search toolbar and command palette */}
+      {/* Global toolbar and command palette controls. */}
       <Toolbar />
 
-      {/* Projects selection modal */}
+      {/* The projects dialog is controlled by the projectsOpen state. */}
       <ProjectsModal
         open={projectsOpen}
         onClose={closeProjects}
@@ -198,6 +210,7 @@ function App() {
             >
               {t.contact}
             </a>
+            {/* Switch the language through shared context without reloading the page. */}
             <button
               type="button"
               className="language-switch"
@@ -212,7 +225,7 @@ function App() {
         </header>
 
         <main>
-          {/* Hero section */}
+          {/* Hero section: localized introduction, portrait, and work link. */}
           
 <section className="hero hero-redesign" id="home">
   <div className="hero-layout">
@@ -249,8 +262,6 @@ function App() {
         />
       </div>
 
-      
-
       <span className="hero-photo-cross" aria-hidden="true">
         +
       </span>
@@ -263,7 +274,7 @@ function App() {
   </div>
 </section>
 
-          {/* Selected projects */}
+          {/* Selected projects: launch the modal instead of navigating away. */}
           <section className="work-section" id="work">
             <Reveal>
               <div className="section-heading">
@@ -316,7 +327,7 @@ function App() {
             </Reveal>
           </section>
 
-          {/* About section */}
+          {/* About section: reveal additional background details on demand. */}
         <section className="about-section" id="about">
           <Reveal>
             <span className="section-label">
@@ -348,6 +359,7 @@ function App() {
                 {aboutExpanded ? t.showLess : t.readMore}
               </button>
 
+              {/* Render extended background details only when requested. */}
               {aboutExpanded && (
                 <div
                   id="about-extra"
@@ -394,7 +406,7 @@ function App() {
         </section>
 
 
-          {/* Contact section */}
+          {/* Contact section: open the contact dialog or visit GitHub. */}
           <section
             className="contact-section"
             id="contact"
@@ -442,11 +454,12 @@ function App() {
         </footer>
       </div>
 
-      {/* Contact modal */}
+      {/* Contact modal: accessible dialog with keyboard focus management. */}
       {contactOpen && (
         <div
           className="contact-overlay"
           onMouseDown={(event) => {
+            // Close only when clicking the backdrop, not the dialog content.
             if (event.target === event.currentTarget) {
               setContactOpen(false);
             }
